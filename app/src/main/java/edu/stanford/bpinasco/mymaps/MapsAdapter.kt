@@ -14,6 +14,7 @@ class MapsAdapter(val context: Context, val userMaps: List<UserMap>, val onClick
 
     interface OnClickListener {
         fun onItemClick(position:Int)
+        fun onItemLongClick(position:Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -29,6 +30,15 @@ class MapsAdapter(val context: Context, val userMaps: List<UserMap>, val onClick
         }
         val textViewTitle = holder.itemView.findViewById<TextView>(R.id.tvMapTitle)
         textViewTitle.text = userMap.title
+        holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
+            override fun onLongClick(p0: View?): Boolean {
+                onClickListener.onItemLongClick(position)
+                return true
+            }
+
+        }
+
+        )
     }
 
     override fun getItemCount() = userMaps.size

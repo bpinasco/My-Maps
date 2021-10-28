@@ -11,10 +11,12 @@ import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import edu.stanford.bpinasco.mymaps.models.Place
 import edu.stanford.bpinasco.mymaps.models.UserMap
 import java.io.*
@@ -54,12 +56,25 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             }
+
+            override fun onItemLongClick(position: Int) {
+                Log.i(TAG, "onItemLongClick $position")
+                userMaps.removeAt(position)
+                mapAdapter.notifyItemRemoved(position)
+                serializableUserMaps(this@MainActivity,userMaps)
+            }
         })
         rvMaps.adapter = mapAdapter
 
             fabCreateMap.setOnClickListener{
             Log.i(TAG,"Tap on FAB")
             showAlertDialog()
+        }
+        rvMaps.let {
+            Snackbar.make(it,"Long press to delete a map!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("OK",{})
+                .setActionTextColor(ContextCompat.getColor(this,android.R.color.white))
+                .show()
         }
     }
 
