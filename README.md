@@ -21,7 +21,7 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://j.gifs.com/NOE2K8.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-GIF created with [MyMaps](http://gifs.com).
+GIF created with [gifs](http://gifs.com).
 
 ## License
 
